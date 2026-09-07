@@ -1,2 +1,4 @@
-# bioglow
-A repository for First Lego League.
+this is teddy 
+teddy says hi 
+teddy says clap you hands 
+oops teddy died
