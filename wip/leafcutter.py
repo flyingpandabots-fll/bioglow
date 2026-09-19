@@ -14,8 +14,10 @@ right_motor = Motor(Port.B, Direction.CLOCKWISE)
 drive_base = DriveBase(left_motor, right_motor, 55,115)
 drive_base.use_gyro(True)
 
-drive_base.straight(280)
 
-drive_base.straight(-280)
-drive_base.reset(0)
-
+drive_base.turn(-45)
+drive_base.straight(620)
+drive_base.turn(90)
+drive_base.straight(110)
+drive_base.turn(-20)
+right_arm.run_angle(200, -90)
