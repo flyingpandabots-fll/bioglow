@@ -16,8 +16,12 @@ drive_base = DriveBase(left_motor, right_motor, 55,115)
 drive_base.use_gyro(True)
 
 
-left_arm.reset_angle(0)
-drive_base.turn(30)
+
+left_arm.run_angle(100, -65)
+drive_base.straight(60)
+#wait(1000)
+#drive_base.turn(30)
 #left_arm.run_angle(500, -60)
-left_arm.run_angle(500, 60)
+left_arm.run_angle(100, 60)
 #left_arm.run_angle(500, -120)
+
