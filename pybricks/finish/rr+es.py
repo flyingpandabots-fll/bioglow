@@ -35,32 +35,5 @@ drive_base.straight(230)
 left_arm.run_angle(100,40)
 drive_base.straight(-20)
 left_arm.run_angle(100,15)
-#drive_base.straight(-300)
+#coming home
 drive_base.arc(-460,-50)
-
-
-
-'''
-
-#coming back
-
-
-drive_base.straight(-760)
-
-#drive_base.turn(45)
-drive_base.arc()
-right_arm.run_angle(900, 180)
-left_arm.run_angle(100, -150)
-
-
-drive_base.straight(300)
-left_arm.run_angle(150, 50)
-
-drive_base.straight(-50)
-left_arm.run_angle(150, 30)
-drive_base.straight(-250)
-
-#drive_base.straight(-400)
-#left_arm.run_target(100, -12)
-Hub.display.icon(Icon.ARROW_UP,)
-'''
