@@ -30,7 +30,7 @@ drive_base.settings(300, 900, 300, 900)
 
 right_arm.run_angle(200,-120)
 # Code to go to the mission "Leafcutter Frenzy"
-drive_base.straight(50)
+drive_base.straight(80)
 drive_base.turn(-45)
 drive_base.straight(620)
 # Turn to face the leafcutter
@@ -43,7 +43,7 @@ right_arm.run_angle(200,120)
 drive_base.settings(100, 100, 100, 100)
 
 # Solve leafcutter
-drive_base.straight(110)
+drive_base.straight(120)
 
 drive_base.straight(-20)
 
@@ -57,7 +57,7 @@ hub.light.on(Color.YELLOW)
 drive_base.turn(-42)
 hub.light.on(Color.GREEN)
 
-drive_base.straight(-10)
+drive_base.straight(20)
 hub.light.on(Color.BLUE)
 
 # Solve humungous fungus
@@ -69,10 +69,10 @@ drive_base.arc(300, -45)
 hub.light.on(Color.GREEN)
 
 # Go to forest elder
-drive_base.turn(-80)
+drive_base.turn(-70)
 hub.light.on(Color.CYAN)
 
-drive_base.straight(-230)
+drive_base.straight(-260)
 hub.light.on(Color.VIOLET)
 
 # Solve forest elder
