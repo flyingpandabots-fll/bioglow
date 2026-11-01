@@ -13,9 +13,10 @@ right_motor = Motor(Port.B, Direction.CLOCKWISE)
 #rcolor_sensor = ColorSensor(Port.D)
 drive_base = DriveBase(left_motor, right_motor, 55,115)
 drive_base.use_gyro(True)
+drive_base.straight(350)
+right_arm.run_angle(200,-270)
+right_arm.run_angle(200,270)
+drive_base.straight(-350)
 
-drive_base.straight(280)
 
-drive_base.straight(-280)
-drive_base.reset(0)
 
