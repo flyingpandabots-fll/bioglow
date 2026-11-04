@@ -3,11 +3,12 @@ from pybricks.pupdevices import Motor
 from pybricks.parameters import Icon, Port, Direction
 from pybricks.tools import wait
 from pybricks.hubs import PrimeHub
-Hub = PrimeHub()
+from robot import drive_base, right_arm
+def keystone_mission():
+  drive_base.straight(350)
+  right_arm.run_angle(200,-270)
+  right_arm.run_angle(200,270)
+  drive_base.straight(-350)
 
-# Set up
-armleft = Motor(Port.A, Direction.COUNTERCLOCKWISE)
-armleft.run_target(200, 120)
 
-Hub.display.icon(Icon.HAPPY,)
-wait(2000)
+
