@@ -11,6 +11,6 @@ def rock_mission():
   drive_base.turn(-9)
 
   # Does the rock mission
-  drive_base.straight(-235)
+  drive_base.straight(-275)
   drive_base.straight(235)
   drive_base.stop()

@@ -13,7 +13,7 @@ def rr_es_mission():
 
     drive_base.use_gyro(True)
     drive_base.settings(300,900,300,900)
-
+    right_arm.reset_angle(0)
     #go to the mission 5
     drive_base.straight(780)
 
@@ -28,8 +28,11 @@ def rr_es_mission():
     drive_base.turn(-45)
     drive_base.straight(-147)
     drive_base.turn(90)
+    right_arm.run_angle(600, -400)
     #left arm down going to mission 2
     left_arm.run_angle(100, -140)
+    #resetting right arm
+
     drive_base.straight(255)
     #solve mission 2
     left_arm.run_angle(100,45, then=Stop.HOLD)

@@ -6,7 +6,7 @@ from pybricks.hubs import PrimeHub
 from robot import drive_base, right_arm, hub
 
 
-def leafcutter_run():
+def leafcutter_mission():
     drive_base.settings(300, 900, 300, 900)
     right_arm.run_angle(200,-120)
     

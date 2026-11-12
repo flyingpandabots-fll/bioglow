@@ -11,11 +11,16 @@ from pybricks.hubs import PrimeHub
 from robot import drive_base,right_arm
 
 hub = PrimeHub()
-
+print("0 is for arm reset for rock/vine missions")
+print("1 is for rock mission")
+print("2 is for rr_es mission")
+print("3 is for drone mission")
+print("4 is for leafcutter mission")
+print("5 is for keystone mission")
 while True:
     selected = hub_menu("0", "1", "2", "3", "4", "5")
     if selected == "0":
-        drive_base.straight(-100)
+        drive_base.straight(-60)
         right_arm.run_angle(200,-90)
     if selected == "1":
         rock_mission()
@@ -28,7 +33,7 @@ while True:
         drone_mission()
 
     elif selected == "4":
-        leafcutter_run()
+        leafcutter_mission()
 
     elif selected == "5":
         keystone_mission()
