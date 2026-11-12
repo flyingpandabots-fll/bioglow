@@ -47,13 +47,13 @@ def drone_mission():
     robot.drive_base.straight(-35)
     robot.drive_base.turn(-35)
     #solving the drone mission
-    robot.drive_base.turn(75)
+    robot.drive_base.turn(80)
 
     # turn back to compensate
-    robot.drive_base.turn(-10)
-        
+    robot.drive_base.turn(-15)
+    
+    robot.left_arm.run_angle(200,-142)
     robot.drive_base.straight(-150)
-    robot.left_arm.run_angle(200,-150)
     robot.drive_base.turn(-45)
     #breakpoint()
     #going to the biocentic arcitecture
@@ -62,17 +62,37 @@ def drone_mission():
     while robot.rcolor_sensor.reflection() > 15:
         print(robot.rcolor_sensor.reflection())
     robot.drive_base.stop()
+    #robot.breakpoint()
+
     #alighning to the biocentric architecture
     robot.drive_base.turn(22)
     robot.drive_base.straight(20)
     robot.drive_base.turn(-5)
     #solving the bird part 
-    robot.left_arm.run_angle(20, 55)
-    robot.drive_base.turn(5)
+    robot.hub.light.on(Color.RED)
+    #robot.breakpoint()
+    robot.left_arm.run_angle(20, 40)
+
+    robot.hub.light.on(Color.ORANGE)
+    #robot.breakpoint()
+    robot.drive_base.straight(50)
+    #robot.drive_base.turn(5)
+
+    robot.hub.light.on(Color.GREEN)
+    #robot.breakpoint()
     #solving the compost hatch
     robot.left_arm.run_angle(100, -20)
-    robot.drive_base.straight(50)
+
+    robot.hub.light.on(Color.BLUE)
+    #robot.breakpoint()
+    robot.drive_base.straight(20)
+
+    robot.hub.light.on(Color.VIOLET)
+    #robot.breakpoint()
     robot.left_arm.run_angle(200, -50)
+
+    robot.hub.light.on(Color.MAGENTA)
+    #robot.breakpoint()
     #driving to home
     robot.drive_base.turn(40)
     robot.drive_base.straight(800)

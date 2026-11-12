@@ -21,9 +21,9 @@ def breakpoint():
   # Wait for any button to be pressed, and save the result.
   pressed = []
   while not any(pressed):
-      pressed = Hub.buttons.pressed()
+      pressed = hub.buttons.pressed()
       wait(10)
 
   # Wait for all buttons to be released.
-  while any(Hub.buttons.pressed()):
+  while any(hub.buttons.pressed()):
       wait(10)
