@@ -7,7 +7,7 @@
 #define DEPTH_DANGER 180
 
 // Temperature where we need to alert
-#define TEMPERATURE_DANGER 72
+#define TEMPERATURE_DANGER 80
 
 //Flow rate where we need to alert
 #define FLOW_DANGER 250

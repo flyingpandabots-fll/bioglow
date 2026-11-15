@@ -53,14 +53,13 @@ def drone_mission():
     robot.drive_base.turn(-55)
     robot.drive_base.turn(70)
     robot.drive_base.straight(-120)
-    robot.drive_base.turn(-45)
-    robot.drive_base.straight(300)
+    robot.drive_base.turn(-43)
+    robot.drive_base.straight(400)
+    robot.drive_base.straight(-40)
         
-    robot.drive_base.turn(45)
+    robot.drive_base.turn(60)
         
-    robot.drive_base.straight(250)
+    robot.drive_base.straight(800)
         
-    robot.drive_base.turn(15)
-        
-    robot.drive_base.straight(550)
     robot.drive_base.stop()
+drone_mission()

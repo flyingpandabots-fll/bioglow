@@ -27,7 +27,7 @@ while True:
     menu_order = slots[next_index:] + slots[:next_index]
     selected = hub_menu(*menu_order)
     if selected == "0":
-        drive_base.straight(-60)
+        drive_base.straight(-70)
         right_arm.run_angle(200,-90)
         drive_base.stop
     if selected == "1":
