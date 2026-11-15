@@ -75,7 +75,7 @@ LiquidCrystal lcd(5, 3, 10, 14, 15, 16);
 // If pin is connected to ground, we run in debug mode where we print sensr values.
 int debugPin = 20;
 bool debugMode = true;
-
+int loopCount = 0;
 void setup() {
   
   /* Set up buzzer */
@@ -217,7 +217,8 @@ void writeToBluetooth()
   
   //In debug mode: Print depth, flow, temp, turbidity and fish count(ultrasonic sensor) in one line.
   //Always print the danger info and when fish count increases.
-  if (debugMode == LOW) {
+  loopCount++;
+  if (loopCount == 50) {
     /* Computer */
     Serial.print("Flow rate: ");
     Serial.print(literPerHour);
@@ -227,6 +228,8 @@ void writeToBluetooth()
     Serial.print(temperature);
     Serial.print("F, Turbidity: ");
     Serial.print(turbidity); 
+    Serial.print(", Fish distance: ");
+    Serial.print(fishDistance);
     Serial.print(", Fish count: ");
     Serial.println(fishCount);
 
@@ -243,7 +246,7 @@ void writeToBluetooth()
     Serial1.print(fishDistance);
     Serial1.print(", Fish count: ");
     Serial1.println(fishCount);
-    
+    loopCount=0;
   }
 }
 
