@@ -3,11 +3,23 @@
 #include "SR04.h"
 #include <SoftwareSerial.h>
 #include <LiquidCrystal.h>
+/* Danger values */
+#define DEPTH_DANGER 180
 
+// Temperature where we need to alert
+#define TEMPERATURE_DANGER 72
+
+//Flow rate where we need to alert
+#define FLOW_DANGER 250
+
+// Turbidity value where we need to alert
+#define TURBIDITY_DANGER 500
+
+// Distance to the wall where ultrasonic sensor is facing.
+#define WALL_DISTANCE 8
 /* Depth sensor */
 int depth = 0;
 int depthPin = A1;
-#define DEPTH_DANGER 400
 
 /* Temperature sensor */
 // Data wire is connected to the Arduino digital pin 4
@@ -20,8 +32,7 @@ OneWire oneWire(ONE_WIRE_BUS);
 DallasTemperature tempSensor(&oneWire);
 
 float temperature;
-// Temperature where we need to alert
-#define TEMPERATURE_DANGER 20
+
 
 /* Flow sensor */
 /*YF- S201 water Flow sensor code for Arduino */
@@ -31,15 +42,13 @@ volatile int  pulseCount;
 unsigned int  literPerHour;
 unsigned long currentTime, loopTime;
 
-//Flow rate where we need to alert
-#define FLOW_DANGER 20
+
 
 /*Turbidity*/
 int turbidityPin = A0;
 int turbidity = 0;
 
-// Turbidity value where we need to alert
-#define TURBIDITY_DANGER 500
+
 
 /* Ultrasonic */
 #define ULTRASONIC_TRIG_PIN 12
@@ -51,8 +60,7 @@ long fishDistance;
 long prevFishDistance;
 int fishCount = 0;
 
-// Distance to the wall where ultrasonic sensor is facing.
-#define WALL_DISTANCE 8
+
 
 /* Status LEDs */
 int tempLED = 6;
@@ -163,8 +171,10 @@ void processFish ()
 void playBuzzer ()
 {
   if ((depth > DEPTH_DANGER) || (literPerHour > FLOW_DANGER) ||
-      (turbidity > TURBIDITY_DANGER) || (temperature > TEMPERATURE_DANGER)){
+      (turbidity < TURBIDITY_DANGER) || (temperature > TEMPERATURE_DANGER)){
     digitalWrite(buzzer, valLEDBuzzer);
+  } else {
+    digitalWrite(buzzer, LOW);
   }
 }
 
@@ -173,15 +183,19 @@ void blinkTempLED ()
   if (temperature > TEMPERATURE_DANGER) {
     digitalWrite(tempLED,valLEDBuzzer);
     Serial1.println("Temperature is too hot!");
-  
+  } else {
+
+    digitalWrite(tempLED, LOW);
   }
 }
 void blinkTurbidityLED ()
 {
-  if (turbidity > TURBIDITY_DANGER){
+  if (turbidity < TURBIDITY_DANGER){
     digitalWrite(turbidityLED, valLEDBuzzer);
     Serial.println("Water is too dirty!");
     Serial1.println("Water is too dirty!");
+  } else {
+    digitalWrite(turbidityLED, LOW);
   }
 
 }
@@ -191,6 +205,8 @@ void blinkFlowLED ()
     digitalWrite(flowLED, valLEDBuzzer);
     Serial.println("Water flow is too fast!");
     Serial1.println("Water flow is too fast!");
+  } else {
+    digitalWrite(flowLED, LOW);
   }
 
 }
@@ -201,14 +217,8 @@ void blinkDepthLED ()
     digitalWrite (depthLED, valLEDBuzzer);
     Serial.println("Water is too deep!");
     Serial1.println("Water is too deep!");
-  }
-}
-
-void readFromBluetooth()
-{
-  if (Serial1.available()){
-    
-    // If we read debug or demo, change the mode
+  } else {
+    digitalWrite (depthLED, LOW);
   }
 }
 
@@ -218,7 +228,7 @@ void writeToBluetooth()
   //In debug mode: Print depth, flow, temp, turbidity and fish count(ultrasonic sensor) in one line.
   //Always print the danger info and when fish count increases.
   loopCount++;
-  if (loopCount == 50) {
+  if (loopCount == 10) {
     /* Computer */
     Serial.print("Flow rate: ");
     Serial.print(literPerHour);
@@ -228,8 +238,6 @@ void writeToBluetooth()
     Serial.print(temperature);
     Serial.print("F, Turbidity: ");
     Serial.print(turbidity); 
-    Serial.print(", Fish distance: ");
-    Serial.print(fishDistance);
     Serial.print(", Fish count: ");
     Serial.println(fishCount);
 
@@ -246,8 +254,9 @@ void writeToBluetooth()
     Serial1.print(fishDistance);
     Serial1.print(", Fish count: ");
     Serial1.println(fishCount);
-    loopCount=0;
+    loopCount = 0;
   }
+
 }
 
 void writeLCD()
@@ -287,7 +296,6 @@ void loop() {
   blinkFlowLED ();
   blinkDepthLED ();
 
-  readFromBluetooth();
   writeToBluetooth();
   writeLCD();
   
