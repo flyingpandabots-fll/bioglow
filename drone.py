@@ -62,4 +62,3 @@ def drone_mission():
     robot.drive_base.straight(800)
         
     robot.drive_base.stop()
-drone_mission()
