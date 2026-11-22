@@ -19,14 +19,14 @@ def leafcutter_mission():
     drive_base.turn(90)
     
     #Put arm down
-    right_arm.run_angle(200,120)
+    right_arm.run_angle(200,100)
     
     #Change to slow speed
     drive_base.settings(100, 100, 100, 100)
     
     # Solve leafcutter
-    drive_base.straight(120)
-    drive_base.straight(-20)
+    drive_base.straight(130)
+    drive_base.straight(-30)
     right_arm.run_angle(200, -25)
 
     # Go back to fast speed
@@ -35,7 +35,7 @@ def leafcutter_mission():
     drive_base.straight(20)
     
     # Solve humungous fungus
-    right_arm.run_angle(200, -110)
+    right_arm.run_angle(200, -150)
     
     # Go to and solve window to the past
     drive_base.arc(300, -45)
@@ -50,6 +50,7 @@ def leafcutter_mission():
 
     # Go back home
     drive_base.arc(-90, 120)
+    right_arm.run_angle(200, 45)
     drive_base.straight(500)
     drive_base.stop()
 

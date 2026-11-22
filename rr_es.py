@@ -23,16 +23,16 @@ def rr_es_mission():
     drive_base.straight(60)
     right_arm.run_angle(600, -600)
     #coming back
-    drive_base.straight(-630)
+    drive_base.straight(-635)
     #going to mission 2
     drive_base.turn(-45)
-    drive_base.straight(-147)
+    drive_base.straight(-165)
     drive_base.turn(90)
     #left arm down going to mission 2
     left_arm.run_angle(100, -140)
     #resetting right arm
 
-    drive_base.straight(242)
+    drive_base.straight(252) # changed from 242
     #solve mission 2
     left_arm.run_angle(100, 55, then=Stop.HOLD)
     #coming home

@@ -61,7 +61,6 @@ long prevFishDistance;
 int fishCount = 0;
 
 
-
 /* Status LEDs */
 int tempLED = 6;
 int turbidityLED = 7;
@@ -73,11 +72,11 @@ int buzzer = 13;
 
 //Value used to switch LED and buzzer to on and off.
 bool valLEDBuzzer;
-
+bool dismissed = false;
 
 /* LCD */
 LiquidCrystal lcd(5, 3, 10, 14, 15, 16);
-
+unsigned long lastLcdReset = 0;
 /* Debugging */
 // If this pin is not connected, we run in regular mode.
 // If pin is connected to ground, we run in debug mode where we print sensr values.
@@ -118,7 +117,7 @@ void setup() {
   
   /* Set up LCD */
   lcd.begin(16,2);
-
+  writeFishCountToLCD();
   /* Set up debug pin */
   pinMode(debugPin, INPUT_PULLUP);
 }
@@ -157,6 +156,14 @@ void processTurbidity ()
   /* Read the turbidity sensor - save it into turbidity variable, so we can use later. */
   turbidity = analogRead(turbidityPin);
 }
+
+void writeFishCountToLCD() {
+  lcd.setCursor(0, 0);
+  lcd.print("Fish: ");
+  lcd.print(fishCount);
+  lcd.print("           "); //remove old digits
+}
+
 void processFish ()
 {
   /* Read the ultrasonic sensor and detect when a fish is found. */
@@ -165,11 +172,17 @@ void processFish ()
     Serial.println("fish found");
     Serial1.println("fish found");
     fishCount++;
+    writeFishCountToLCD();
   }
   prevFishDistance = fishDistance;
 }
 void playBuzzer ()
 {
+  if (dismissed) {
+    /* buzzer has been dismissed */
+    digitalWrite(buzzer, LOW);
+    return;
+  }
   if ((depth > DEPTH_DANGER) || (literPerHour > FLOW_DANGER) ||
       (turbidity < TURBIDITY_DANGER) || (temperature > TEMPERATURE_DANGER)){
     digitalWrite(buzzer, valLEDBuzzer);
@@ -192,7 +205,7 @@ void blinkTurbidityLED ()
 {
   if (turbidity < TURBIDITY_DANGER){
     digitalWrite(turbidityLED, valLEDBuzzer);
-    Serial.println("Water is too dirty!");
+    //Serial.println("Water is too dirty!");
     Serial1.println("Water is too dirty!");
   } else {
     digitalWrite(turbidityLED, LOW);
@@ -261,10 +274,6 @@ void writeToBluetooth()
 
 void writeLCD()
 {
-  lcd.clear();
-  lcd.print("Fish:");
-  lcd.setCursor(6,0);
-  lcd.print(fishCount);
   if (debugMode == LOW) {
     lcd.setCursor(0,1);
     lcd.print(literPerHour);
@@ -278,8 +287,28 @@ void writeLCD()
     lcd.print(turbidity);
     lcd.print(",");
     lcd.print(fishDistance);
+  } else {
+    lcd.print("                ");
   }
 
+}
+
+void handleDismiss() {
+  dismissed = true;
+}
+void readFromBluetooth() {
+  if (Serial.available() > 0) {
+    // Read until newline character
+    String message = Serial.readStringUntil('\n');
+    
+    // Remove any trailing '\r' (carriage return) or extra spaces
+    message.trim(); 
+
+    // Check if the text matches "dismiss" (case-insensitive)
+    if (message.equalsIgnoreCase("dismiss")) {
+      handleDismiss();
+    }
+  }
 }
 void loop() {
   debugMode = digitalRead(debugPin);
@@ -296,10 +325,18 @@ void loop() {
   blinkFlowLED ();
   blinkDepthLED ();
 
+  readFromBluetooth();
   writeToBluetooth();
-  writeLCD();
+  if (millis() - lastLcdReset > 3000) {
+    lcd.begin(16,2);
+    writeFishCountToLCD();
+    lastLcdReset = millis();
+  }
+  //writeLCD();
+  
   
 
   valLEDBuzzer = !valLEDBuzzer;
+  delay(300);
   
 }
