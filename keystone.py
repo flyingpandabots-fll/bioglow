@@ -11,19 +11,9 @@ def keystone_mission():
   drive_base.turn(15)
   right_arm.run_angle(200,-240)
 
-  right_arm.run_angle(200,240)
+  drive_base.turn(-15)
+
+  right_arm.run_angle(200,180)
   
-  drive_base.turn(-15)
-  drive_base.straight(-350)
+  #drive_base.straight(-350)
   drive_base.stop()
-
-
-""" right_arm.run_angle(200,-360, then=Stop.HOLD)
-  right_arm.run_angle(200,90)
-  drive_base.turn(15)
-  right_arm.run_angle(200,-120)
-  right_arm.run_angle(200,300) 
-  drive_base.turn(-15)
-  drive_base.straight(-350)
-  drive_base.stop()
- """
