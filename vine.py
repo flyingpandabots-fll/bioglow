@@ -5,6 +5,7 @@ from pybricks.tools import wait
 from pybricks.hubs import PrimeHub
 from robot import drive_base, breakpoint
 def vine_mission():
+    drive_base.use_gyro(True)
     # Go to vine mission
     drive_base.turn(48)
     drive_base.straight(-530)

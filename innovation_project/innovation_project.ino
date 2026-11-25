@@ -4,7 +4,7 @@
 #include <SoftwareSerial.h>
 #include <LiquidCrystal.h>
 /* Danger values */
-#define DEPTH_DANGER 180
+#define DEPTH_DANGER 350
 
 // Temperature where we need to alert
 #define TEMPERATURE_DANGER 80
@@ -185,7 +185,7 @@ void playBuzzer ()
   }
   if ((depth > DEPTH_DANGER) || (literPerHour > FLOW_DANGER) ||
       (turbidity < TURBIDITY_DANGER) || (temperature > TEMPERATURE_DANGER)){
-    digitalWrite(buzzer, valLEDBuzzer);
+    digitalWrite(buzzer, valLEDBuzzer);  
   } else {
     digitalWrite(buzzer, LOW);
   }
@@ -195,6 +195,7 @@ void blinkTempLED ()
 {
   if (temperature > TEMPERATURE_DANGER) {
     digitalWrite(tempLED,valLEDBuzzer);
+    Serial.println("Temperature is too hot!");
     Serial1.println("Temperature is too hot!");
   } else {
 
@@ -205,7 +206,7 @@ void blinkTurbidityLED ()
 {
   if (turbidity < TURBIDITY_DANGER){
     digitalWrite(turbidityLED, valLEDBuzzer);
-    //Serial.println("Water is too dirty!");
+    Serial.println("Water is too dirty!");
     Serial1.println("Water is too dirty!");
   } else {
     digitalWrite(turbidityLED, LOW);

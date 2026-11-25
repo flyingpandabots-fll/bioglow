@@ -18,7 +18,7 @@ drive_base.settings(300, 900, 300, 900)
 
 
 def breakpoint():
-  # Wait for any button to be pressed, and save the result.
+  # Wait for any button to be pressed.
   pressed = []
   while not any(pressed):
       pressed = hub.buttons.pressed()
@@ -27,3 +27,5 @@ def breakpoint():
   # Wait for all buttons to be released.
   while any(hub.buttons.pressed()):
       wait(10)
+
+      

@@ -53,7 +53,15 @@ def drone_mission():
     robot.drive_base.turn(-55)
     robot.drive_base.turn(70)
     robot.drive_base.straight(-120)
-    robot.drive_base.turn(-43)
+
+    hub_name = robot.hub.system.info()["name"]
+    print("Hub name:", hub_name)
+    if hub_name == "Bingo":
+      robot.drive_base.turn(-45)
+    else: #Bluey
+      robot.drive_base.turn(-43)
+
+
     robot.drive_base.straight(400)
     robot.drive_base.straight(-40)
         

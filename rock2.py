@@ -7,6 +7,7 @@ from pybricks.hubs import PrimeHub
 from robot import drive_base, breakpoint
 
 def rock_mission():
+  drive_base.use_gyro(True)
   drive_base.straight(-210)
   # Positions the robot to the starting position for the rock mission
   drive_base.turn(-9)
