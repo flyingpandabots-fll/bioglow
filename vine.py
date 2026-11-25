@@ -5,10 +5,9 @@ from pybricks.tools import wait
 from pybricks.hubs import PrimeHub
 from robot import drive_base, breakpoint
 def vine_mission():
-    drive_base.use_gyro(True)
     # Go to vine mission
     drive_base.turn(48)
-    drive_base.straight(-530)
+    drive_base.straight(-480)
     drive_base.turn(-43)
 
     #Go slow and push vine down
@@ -19,5 +18,5 @@ def vine_mission():
     # Go back home
     drive_base.settings(900, 900, 900, 900)
     drive_base.turn(45)
-    drive_base.straight(680)
+    drive_base.straight(700)
     drive_base.stop()

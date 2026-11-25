@@ -9,16 +9,9 @@ from vine import vine_mission
 
 from pybricks.tools import hub_menu
 from pybricks.hubs import PrimeHub
-from robot import drive_base,right_arm
-
+from robot import hub, drive_base, right_arm, wait_for_gyro, start_run
 hub = PrimeHub()
 hub.display.orientation(up=Side.BOTTOM)
-print("0 is for arm reset for rock/vine missions")
-print("1 is for rock mission")
-print("2 is for rr_es mission")
-print("3 is for drone mission")
-print("4 is for leafcutter mission")
-print("5 is for keystone mission")
 slots = ["0", "1", "2", "3", "4", "5"]
 next_index = 0
 
@@ -26,6 +19,9 @@ while True:
     # Rotate the list so next_index is at the front
     menu_order = slots[next_index:] + slots[:next_index]
     selected = hub_menu(*menu_order)
+     # Every run starts from the same state, no matter what ran before.
+    wait_for_gyro()
+    start_run()
     if selected == "0":
         drive_base.straight(-70)
         right_arm.run_angle(200,-90)
