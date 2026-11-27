@@ -42,31 +42,51 @@ def drone_mission():
     robot.drive_base.straight(620)
     robot.drive_base.straight(-50)
     # getting aligned with the landing area
+    robot.hub.light.on(Color.RED)
     robot.drive_base.turn(-30)
+    robot.hub.light.on(Color.ORANGE)
     robot.drive_base.straight(55)
+    robot.hub.light.on(Color.GREEN)
     robot.drive_base.straight(-35)
-    robot.drive_base.turn(-35)
-    #solving the drone mission
-    robot.drive_base.turn(50)
-    
-    robot.drive_base.straight(-20)
-    robot.drive_base.turn(-55)
-    robot.drive_base.turn(70)
-    robot.drive_base.straight(-120)
-
+    robot.hub.light.on(Color.BLUE)
     hub_name = robot.hub.system.info()["name"]
     print("Hub name:", hub_name)
-    if hub_name == "Bingo":
-      robot.drive_base.turn(-45)
+    if hub_name == "bingo":
+      robot.drive_base.turn(-33)
+    else:
+      robot.drive_base.turn(-35)
+    #solving the drone mission
+    robot.hub.light.on(Color.VIOLET)
+    robot.drive_base.turn(50)
+    robot.hub.light.on(Color.MAGENTA)
+    robot.drive_base.straight(-20)
+    robot.hub.light.on(Color.CYAN)
+  
+    robot.drive_base.turn(-55)
+    robot.hub.light.on(Color.RED)
+    robot.drive_base.turn(70)
+    robot.hub.light.on(Color.ORANGE)
+    robot.drive_base.straight(-120)
+    robot.hub.light.on(Color.GREEN)
+
+    if hub_name == "bingo":
+      robot.drive_base.turn(-46)
+      robot.drive_base.straight(400)
+      #robot.drive_base.turn(2)
+      #robot.drive_base.straight(200)
     else: #Bluey
       robot.drive_base.turn(-43)
+      robot.drive_base.straight(400)
+    robot.hub.light.on(Color.BLUE)
 
-
-    robot.drive_base.straight(400)
+    robot.hub.light.on(Color.VIOLET)
     robot.drive_base.straight(-40)
+    robot.hub.light.on(Color.MAGENTA)
         
     robot.drive_base.turn(60)
+    robot.hub.light.on(Color.CYAN)
         
     robot.drive_base.straight(800)
+    robot.hub.light.on(Color.RED)
         
     robot.drive_base.stop()
