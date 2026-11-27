@@ -3,10 +3,11 @@ from pybricks.pupdevices import ColorSensor, Motor
 from pybricks.parameters import Color, Icon, Port, Direction
 from pybricks.tools import wait
 from pybricks.hubs import PrimeHub
-from robot import drive_base, right_arm, hub
+from robot import drive_base, right_arm, hub,breakpoint
 
 
 def leafcutter_mission():
+    drive_base.use_gyro(True)
     drive_base.settings(300, 900, 300, 900)
     right_arm.run_angle(200,-120)
     
@@ -19,14 +20,14 @@ def leafcutter_mission():
     drive_base.turn(90)
     
     #Put arm down
-    right_arm.run_angle(200,120)
+    right_arm.run_angle(200,100)
     
     #Change to slow speed
     drive_base.settings(100, 100, 100, 100)
     
     # Solve leafcutter
-    drive_base.straight(120)
-    drive_base.straight(-20)
+    drive_base.straight(135)
+    drive_base.straight(-35)
     right_arm.run_angle(200, -25)
 
     # Go back to fast speed
@@ -35,8 +36,8 @@ def leafcutter_mission():
     drive_base.straight(20)
     
     # Solve humungous fungus
-    right_arm.run_angle(200, -110)
-    
+    right_arm.run_angle(200, -160)
+
     # Go to and solve window to the past
     drive_base.arc(300, -45)
 
@@ -50,6 +51,7 @@ def leafcutter_mission():
 
     # Go back home
     drive_base.arc(-90, 120)
+    right_arm.run_angle(200, 45)
     drive_base.straight(500)
     drive_base.stop()
 

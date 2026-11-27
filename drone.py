@@ -45,19 +45,30 @@ def drone_mission():
     robot.drive_base.turn(-30)
     robot.drive_base.straight(55)
     robot.drive_base.straight(-35)
-    robot.drive_base.turn(-35)
+    hub_name = robot.hub.system.info()["name"]
+    print("Hub name:", hub_name)
+    if hub_name == "bingo":
+      robot.drive_base.turn(-33)
+    else:
+      robot.drive_base.turn(-35)
     #solving the drone mission
     robot.drive_base.turn(50)
-    
     robot.drive_base.straight(-20)
+    
     robot.drive_base.turn(-55)
     robot.drive_base.turn(70)
     robot.drive_base.straight(-120)
-    robot.drive_base.turn(-43)
+    
+    if hub_name == "bingo":
+      robot.drive_base.turn(-47)
+    else: #Bluey
+      robot.drive_base.turn(-43)
+
+    # Hit compost hatch
     robot.drive_base.straight(400)
+          
     robot.drive_base.straight(-40)
-        
-    robot.drive_base.turn(60)
+    robot.drive_base.turn(55)
         
     robot.drive_base.straight(800)
         
